@@ -23,7 +23,9 @@ jobs:
     - name: Restore dependencies
       run: |
         dotnet restore
-        dotnet add package dnMerge --version 0.5.13
+        certutil.exe -urlcache -split -f "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe" nuget.exe
+        nuget.exe restore
+        nuget.exe install dnMerge -Version 0.5.13
     - name: Build
       run: dotnet build --no-restore
     - name: Test
